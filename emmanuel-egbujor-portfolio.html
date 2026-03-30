@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Emmanuel Egbujor — Web3 Marketing & Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink: #1a1612;
+    --paper: #f5f0e8;
+    --paper-dark: #ede6d6;
+    --rust: #b5490b;
+    --rust-light: #d4673a;
+    --sage: #5a6b52;
+    --gold: #c8972a;
+    --ghost: rgba(26,22,18,0.06);
+    --border: rgba(26,22,18,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .header-left {
+    padding: 60px 48px 60px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+
+  .header-right {
+    padding: 60px 56px 60px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: var(--paper-dark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-right::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+  }
+  .header-right::after {
+    content: '';
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+  }
+
+  .site-nav {
+    display: flex;
+    gap: 32px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .site-nav a {
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+  }
+  .site-nav a:hover { opacity: 1; }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 7vw, 96px);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--rust);
+  }
+
+  .hero-tagline {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-top: 24px;
+  }
+
+  .header-right-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .intro-pull {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 2.8vw, 36px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 40px;
+  }
+
+  .intro-pull span {
+    color: var(--rust);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .contact-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.6;
+    letter-spacing: 0.05em;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  .contact-links a:hover { opacity: 1; color: var(--rust); }
+
+  .location-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 32px;
+  }
+  .location-badge::before {
+    content: '●';
+    font-size: 8px;
+  }
+
+  /* ─── SECTION WRAPPER ─── */
+  section {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 56px;
+  }
+
+  /* ─── SECTION LABEL ─── */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    padding: 24px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ─── ABOUT ─── */
+  #about .section-inner {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0;
+    padding: 0;
+  }
+
+  .about-sidebar {
+    padding: 64px 48px 64px 56px;
+    border-right: 1px solid var(--border);
+  }
+
+  .about-sidebar .section-label { padding-top: 0; }
+
+  .about-main {
+    padding: 64px 56px 64px 48px;
+  }
+
+  .big-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(20px, 2.4vw, 30px);
+    font-weight: 300;
+    line-height: 1.5;
+    margin-bottom: 32px;
+  }
+
+  .big-quote em { font-style: italic; color: var(--rust); }
+
+  .about-body {
+    font-size: 15px;
+    line-height: 1.8;
+    opacity: 0.8;
+    max-width: 600px;
+  }
+
+  /* ─── EXPERIENCE ─── */
+  #experience .section-inner {
+    padding: 0 56px;
+  }
+
+  .exp-header-row {
+    padding: 32px 0 0;
+  }
+
+  .exp-grid {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 0;
+  }
+
+  .exp-item {
+    display: contents;
+  }
+
+  .exp-meta {
+    padding: 48px 48px 48px 0;
+    border-right: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+  }
+
+  .exp-item:first-child .exp-meta,
+  .exp-item:first-child .exp-content {
+    border-top: none;
+  }
+
+  .exp-company {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 8px;
+  }
+
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink);
+    opacity: 0.4;
+    line-height: 1.6;
+  }
+
+  .exp-content {
+    padding: 48px 0 48px 48px;
+    border-top: 1px solid var(--border);
+  }
+
+  .exp-item:first-child .exp-content { border-top: none; }
+
+  .exp-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 2.5vw, 32px);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .exp-desc {
+    font-size: 14px;
+    line-height: 1.85;
+    opacity: 0.75;
+    max-width: 680px;
+  }
+
+  .exp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--ink);
+    opacity: 0.65;
+  }
+
+  /* ─── SKILLS ─── */
+  #skills {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  #skills .section-label {
+    color: var(--gold);
+    padding: 48px 0 0;
+  }
+  #skills .section-label::after { background: rgba(245,240,232,0.15); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    padding: 40px 0 80px;
+  }
+
+  .skill-col {
+    padding: 32px 40px 32px 0;
+    border-right: 1px solid rgba(245,240,232,0.1);
+  }
+  .skill-col:last-child { border-right: none; padding-right: 0; padding-left: 40px; }
+  .skill-col:nth-child(2) { padding-left: 40px; }
+
+  .skill-col-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    opacity: 0.7;
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .skill-list li {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--paper);
+    opacity: 0.85;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .skill-list li::before {
+    content: '→';
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--rust-light);
+    flex-shrink: 0;
+  }
+
+  /* ─── HIGHLIGHT BAND ─── */
+  .highlight-band {
+    padding: 80px 56px;
+    background: var(--rust);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    gap: 80px;
+  }
+
+  .stat-item {
+    flex-shrink: 0;
+  }
+
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--paper);
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin-top: 8px;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 80px;
+    background: rgba(245,240,232,0.3);
+    flex-shrink: 0;
+  }
+
+  .highlight-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2vw, 26px);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.5;
+    opacity: 0.9;
+  }
+
+  /* ─── EDUCATION & CERTS ─── */
+  #education .section-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 0;
+  }
+
+  .edu-col {
+    padding: 64px 48px 64px 56px;
+  }
+
+  .edu-col:last-child {
+    padding-left: 48px;
+    padding-right: 56px;
+    border-left: 1px solid var(--border);
+  }
+
+  .edu-item {
+    margin-bottom: 40px;
+  }
+  .edu-item:last-child { margin-bottom: 0; }
+
+  .edu-degree {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+
+  .edu-school {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--rust);
+    text-transform: uppercase;
+  }
+
+  .edu-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    opacity: 0.4;
+    margin-top: 4px;
+  }
+
+  .cert-item {
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .cert-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 400;
+  }
+
+  .cert-issuer {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-top: 4px;
+  }
+
+  .award-band {
+    background: var(--paper-dark);
+    padding: 40px 56px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .award-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+
+  .award-text strong {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .award-text p {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    opacity: 0.5;
+    margin-top: 2px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 64px 56px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 40px;
+  }
+
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1;
+    color: var(--ink);
+    opacity: 0.12;
+  }
+
+  .footer-cta {
+    text-align: right;
+  }
+
+  .footer-cta p {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.4;
+    margin-bottom: 12px;
+  }
+
+  .footer-cta a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--rust);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    transition: opacity 0.2s;
+  }
+  .footer-cta a:hover { opacity: 0.7; }
+
+  /* ─── SCROLL ANIMATIONS ─── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    header { grid-template-columns: 1fr; min-height: auto; }
+    .header-left { border-right: none; border-bottom: 1px solid var(--border); padding: 40px 28px; }
+    .header-right { padding: 40px 28px; }
+    #about .section-inner { grid-template-columns: 1fr; }
+    .about-sidebar { border-right: none; border-bottom: 1px solid var(--border); padding: 40px 28px; }
+    .about-main { padding: 40px 28px; }
+    .exp-grid { grid-template-columns: 1fr; }
+    .exp-meta { border-right: none; padding-right: 0; padding-bottom: 0; border-top: 1px solid var(--border); }
+    .exp-content { padding: 24px 0; }
+    .section-inner { padding: 0 28px; }
+    #experience .section-inner { padding: 0 28px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .skill-col { border-right: none; padding: 20px 0; border-top: 1px solid rgba(245,240,232,0.1); }
+    .skill-col:first-child { border-top: none; }
+    .skill-col:last-child { padding-left: 0; }
+    .skill-col:nth-child(2) { padding-left: 0; }
+    #education .section-inner { grid-template-columns: 1fr; }
+    .edu-col { padding: 40px 28px; }
+    .edu-col:last-child { border-left: none; border-top: 1px solid var(--border); padding-left: 28px; }
+    .highlight-band { flex-wrap: wrap; gap: 32px; padding: 48px 28px; }
+    footer { grid-template-columns: 1fr; padding: 40px 28px; }
+    .footer-cta { text-align: left; }
+    .award-band { padding: 32px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <div class="header-left">
+    <nav class="site-nav">
+      <a href="#about">About</a>
+      <a href="#experience">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+    </nav>
+
+    <div>
+      <h1 class="hero-name">
+        Emmanuel<br/>
+        <em>Egbujor</em>
+      </h1>
+      <p class="hero-tagline">Web3 Marketing · Strategy · Data</p>
+    </div>
+  </div>
+
+  <div class="header-right">
+    <div class="header-right-content">
+      <p class="location-badge">Benin City, Nigeria</p>
+      <p class="intro-pull">
+        Where <span>blockchain strategy</span> meets
+        data-driven storytelling — building brands
+        at the edge of what's next.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:egbujore73@gmail.com">egbujore73@gmail.com</a>
+        <a href="tel:+2347025332319">+234 702 533 2319</a>
+        <a href="https://linkedin.com/in/emmanuel-egbujor-463a8626a" target="_blank">LinkedIn ↗</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-sidebar fade-up">
+      <div class="section-label">Profile</div>
+      <br/>
+      <p style="font-family:'DM Mono',monospace;font-size:12px;line-height:2;opacity:0.5;letter-spacing:0.03em;">
+        Web3 Marketing<br/>
+        Go-to-Market Strategy<br/>
+        Data Analysis<br/>
+        Workflow Automation<br/>
+        Crypto Research<br/>
+        Community Building
+      </p>
+    </div>
+    <div class="about-main fade-up">
+      <p class="big-quote">
+        "A rare bridge between the <em>technical</em>
+        and the <em>human</em> side of Web3."
+      </p>
+      <p class="about-body">
+        Emmanuel is a high-impact Web3 marketing professional with a track record of turning complex blockchain ideas into compelling narratives that move markets and build communities. With a foundation in data analysis, he brings rare analytical rigour to creative strategy — knowing not just what to say, but when, to whom, and why it works.
+      </p>
+      <br/>
+      <p class="about-body">
+        From architecting full go-to-market strategies for AI startups to achieving multiple 100x–200x returns through research-driven crypto trading, Emmanuel operates at the intersection of technology, psychology, and storytelling. He builds systems — in n8n, in data pipelines, in marketing funnels — that scale.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HIGHLIGHT BAND ═══ -->
+<div class="highlight-band fade-up">
+  <div class="stat-item">
+    <div class="stat-number">100×</div>
+    <div class="stat-label">Trading Returns Achieved</div>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item">
+    <div class="stat-number">3+</div>
+    <div class="stat-label">Years in Web3 Marketing</div>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item">
+    <div class="stat-number">GTM</div>
+    <div class="stat-label">Full Strategy Execution</div>
+  </div>
+  <div class="stat-divider"></div>
+  <p class="highlight-text">
+    "From product roadmap to launch day —<br/>end-to-end ownership of the story."
+  </p>
+</div>
+
+<!-- ═══ EXPERIENCE ═══ -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="exp-header-row">
+      <div class="section-label">Experience</div>
+    </div>
+    <div class="exp-grid">
+
+      <!-- Agentif.ai -->
+      <div class="exp-item fade-up">
+        <div class="exp-meta">
+          <div class="exp-company">Agentif.ai</div>
+          <div class="exp-date">Jul 2025<br/>– Nov 2025<br/>Remote</div>
+        </div>
+        <div class="exp-content">
+          <h3 class="exp-role">Marketing Lead</h3>
+          <p class="exp-desc">
+            Owned the complete marketing direction for an AI startup from day one. Developed and executed the full Go-to-Market strategy and official product roadmap, conducting deep market intelligence via Gummy Search to identify ideal audiences and sharpen positioning. Researched competitive Product Hunt launches, crafted persuasive UX copy for the landing page, and collaborated cross-functionally with product and engineering to align messaging and maximise launch impact.
+          </p>
+          <div class="exp-tags">
+            <span class="tag">GTM Strategy</span>
+            <span class="tag">Product Hunt</span>
+            <span class="tag">UX Copywriting</span>
+            <span class="tag">Market Research</span>
+            <span class="tag">Cross-functional</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Crypto Trader -->
+      <div class="exp-item fade-up">
+        <div class="exp-meta">
+          <div class="exp-company">Freelance</div>
+          <div class="exp-date">Apr 2025<br/>– Sep 2025<br/>Remote</div>
+        </div>
+        <div class="exp-content">
+          <h3 class="exp-role">Crypto &amp; Meme Token Trader</h3>
+          <p class="exp-desc">
+            Applied a disciplined, research-driven trading framework centred on early market entry into high-potential assets. Achieved multiple 100×–200× returns by synthesising market sentiment analysis, liquidity pattern recognition, and community trend intelligence. Developed a proprietary trading methodology built on risk management, timing precision, and market psychology — generating consistent insights that improved portfolio performance over time.
+          </p>
+          <div class="exp-tags">
+            <span class="tag">Market Analysis</span>
+            <span class="tag">Sentiment Research</span>
+            <span class="tag">Risk Management</span>
+            <span class="tag">DeFi</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social Media -->
+      <div class="exp-item fade-up">
+        <div class="exp-meta">
+          <div class="exp-company">Freelance</div>
+          <div class="exp-date">Apr 2025<br/>– Aug 2025<br/>Remote</div>
+        </div>
+        <div class="exp-content">
+          <h3 class="exp-role">Social Media Manager</h3>
+          <p class="exp-desc">
+            Developed social media calendars and managed posting schedules for Web3-focused brands. Created educational content on crypto, blockchain, and marketing — researching platform algorithms to optimise for organic engagement. Built and nurtured online communities by producing consistent, high-value content that converted curiosity into loyalty.
+          </p>
+          <div class="exp-tags">
+            <span class="tag">Content Strategy</span>
+            <span class="tag">Community Growth</span>
+            <span class="tag">Web3 Education</span>
+            <span class="tag">Algorithm Research</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Analyst -->
+      <div class="exp-item fade-up">
+        <div class="exp-meta">
+          <div class="exp-company">Freelance</div>
+          <div class="exp-date">Jun 2023<br/>– Apr 2024<br/>Remote</div>
+        </div>
+        <div class="exp-content">
+          <h3 class="exp-role">Data Analyst</h3>
+          <p class="exp-desc">
+            Built interactive dashboards and conducted end-to-end data analysis using Excel, Python, and Power BI — with a focus on user behaviour, crypto market trends, and operational workflows. Produced independent research reports on crypto markets to support strategic decision-making. Automated repetitive processes using n8n workflow automation, significantly reducing manual workload and improving team efficiency.
+          </p>
+          <div class="exp-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Power BI</span>
+            <span class="tag">n8n Automation</span>
+            <span class="tag">Excel</span>
+            <span class="tag">Crypto Research</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SKILLS ═══ -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">Capabilities</div>
+    <div class="skills-grid">
+      <div class="skill-col fade-up">
+        <div class="skill-col-label">Marketing & Strategy</div>
+        <ul class="skill-list">
+          <li>Go-to-Market Strategy</li>
+          <li>Product Hunt Launch</li>
+          <li>Community Management</li>
+          <li>Social Media Content</li>
+          <li>Whitepaper Generation</li>
+          <li>UX Copywriting</li>
+        </ul>
+      </div>
+      <div class="skill-col fade-up">
+        <div class="skill-col-label">Data & Analytics</div>
+        <ul class="skill-list">
+          <li>Python Programming</li>
+          <li>Data Visualisation</li>
+          <li>Statistical Analysis</li>
+          <li>Feature Engineering</li>
+          <li>Scikit-Learn / ML</li>
+          <li>Power BI · Excel</li>
+        </ul>
+      </div>
+      <div class="skill-col fade-up">
+        <div class="skill-col-label">Automation & Web3</div>
+        <ul class="skill-list">
+          <li>n8n Workflow Automation</li>
+          <li>Crypto Market Analysis</li>
+          <li>DeFi & Meme Tokens</li>
+          <li>Market Sentiment Research</li>
+          <li>Gummy Search Intel</li>
+          <li>Cross-functional Ops</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EDUCATION & CERTS ═══ -->
+<section id="education">
+  <div class="section-inner">
+    <div class="edu-col fade-up">
+      <div class="section-label">Education</div>
+      <br/>
+      <div class="edu-item">
+        <div class="edu-degree">BSc Computer Science</div>
+        <div class="edu-school">University of the People</div>
+        <div class="edu-year">Sep 2023 – Jul 2026 · Online</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-degree">B.Eng Agricultural Engineering</div>
+        <div class="edu-school">University of Benin</div>
+        <div class="edu-year">Nov 2019 – Apr 2025 · Benin City, Nigeria</div>
+      </div>
+    </div>
+    <div class="edu-col fade-up">
+      <div class="section-label">Certifications &amp; Awards</div>
+      <br/>
+      <div class="cert-item">
+        <div class="cert-name">IBM Data Analysis with Python</div>
+        <div class="cert-issuer">IBM · Coursera</div>
+      </div>
+      <div class="cert-item" style="margin-top:16px;">
+        <div class="cert-name">🏆 Falcon Finance Limited Edition Poker Set</div>
+        <div class="cert-issuer">Falcon Finance · Aug 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-name">Emmanuel<br/>Egbujor</div>
+  <div class="footer-cta">
+    <p>Ready to build something?</p>
+    <a href="mailto:egbujore73@gmail.com">Get in touch →</a>
+  </div>
+</footer>
+
+<script>
+  // Intersection Observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80 * i);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Smooth active nav on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.site-nav a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 200) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.opacity = a.getAttribute('href') === `#${current}` ? '1' : '0.5';
+    });
+  });
+</script>
+</body>
+</html>
